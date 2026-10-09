@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://docs.anthropic.com/en/docs/claude-code"><img alt="Claude Code Skill" src="https://img.shields.io/badge/Claude%20Code-Skill-7C3AED?logo=anthropic&logoColor=white"></a>
+  <a href="SKILL.md"><img alt="Agent Skill" src="https://img.shields.io/badge/Agent-Skill-7C3AED"></a>
   <a href="SKILL.md"><img alt="pipeline" src="https://img.shields.io/badge/pipeline-9%20stages-4F46E5"></a>
   <a href="templates/project/06-manuscript/latex/"><img alt="output" src="https://img.shields.io/badge/output-LaTeX-008080?logo=latex&logoColor=white"></a>
   <a href="README.md"><img alt="lang" src="https://img.shields.io/badge/lang-%E4%B8%AD%E6%96%87%20%2F%20EN-0EA5E9"></a>
@@ -20,7 +20,7 @@
 
 ## 这是什么
 
-`paper-pipeline` 是一个 **Claude Code / ZCode skill**,把一篇论文的完整生命周期做成九阶段状态机:
+`paper-pipeline` 是一个 **agent skill**(可装入任何支持 skill 机制的编码 agent),把一篇论文的完整生命周期做成九阶段状态机:
 选题 → 文献 → idea → 方法 → 实验 → 消融 → 撰写 → 投稿 → 汇报转化。
 
 它只做三件事:**管顺序、管工件、管门**。具体干活的是各子 skill(文献检索、精读卡、统计审查、
@@ -111,10 +111,13 @@ paper-pipeline/
 │   ├── 06-manuscript/          # 大纲 + LaTeX 工程骨架(latexmk 配置齐全)
 │   ├── 07-submission/          # 投稿包
 │   └── 08-dissemination/       # 汇报转化台账
-├── skills/                     # 随仓库分发的绘图子 skill(克隆即用)
+├── skills/                     # 全部子 skill 随仓库分发(24 个,克隆即用)
+│   ├── nature-*/               # 文献·写作·投稿·转化全系列(21 个,含 researchwrite 所在的
+│   │                           #   nature-proposal-writer 与内部依赖 nature-shared)
 │   ├── scibox-diagram/         # draw.io 可编辑示意图(路线图/框架图/架构图)
 │   ├── scibox-figure/          # 科研绘图模板(SHAP 蜂群、云雨、ROC、泰勒图等)
-│   └── nature-figure/          # 期刊格式数据图(Python/R)
+│   ├── anti-defensive-writing/ # 反防御性写作(+ 英文版 -en)
+│   └── code-review-skill/      # 多语言代码审查
 ├── docs/
 │   └── pipeline-design.html / .json   # 流水线可视化设计图
 └── assets/
@@ -126,28 +129,36 @@ paper-pipeline/
 | 脚本 | 用法 | 说明 |
 |------|------|------|
 | `scripts/build-manuscript.sh` | `build-manuscript.sh <latex-dir>` | latexmk 优先(回退 xelatex 链);检查 error / undefined 引用,退出码 0 才算过 |
-| `scripts/literature-batch.dw.ts` | 复制到 `.zcode/workflow-drafts/` 改 `PROJECT_DIR` 后运行 | 待精读 ≥5 篇时并行产出精读卡;首次 `MAX_PDF=2` 试跑 |
-| `scripts/multi-reviewer.dw.ts` | 同上 | 三位不同视角审稿人隔离评审,汇总视图只给作者 |
+| `scripts/literature-batch.dw.ts` | 复制到 agent 的工作流草稿目录,改 `PROJECT_DIR` 与 `CARD_SKILL` 后运行 | 待精读 ≥5 篇时并行产出精读卡;首次 `MAX_PDF=2` 试跑 |
+| `scripts/multi-reviewer.dw.ts` | 同上(改 `REVIEWER_SKILL`) | 三位不同视角审稿人隔离评审,汇总视图只给作者 |
 
-## 子 skill 依赖
+## 子 skill
 
-**三个绘图 skill 已随仓库分发**(`skills/` 目录),覆盖论文全流程的出图需求,克隆即用:
+**全部被调度的子 skill 都随仓库分发**(`skills/` 目录,24 个),克隆即得完整的九阶段流水线能力,
+无需另外收集工作区:
 
-| skill | 能力 | 阶段 |
-|-------|------|------|
-| `scibox-diagram` | draw.io 可编辑示意图:技术路线图、研究框架图、架构/流程图,支持高保真复刻参考图 | 4 · 7 |
-| `scibox-figure`(注册名 `mathmodel-figure-templates`) | 现成 Python 绘图模板:SHAP 蜂群、配对云雨、ROC、泰勒图、相关矩阵等 | 6 |
-| `nature-figure` | 期刊格式数据图(Python/R),多面板组合、投稿级导出 | 5 · 6 · 7 |
+| 系列 | skill | 能力 | 阶段 |
+|------|-------|------|------|
+| 绘图 | `scibox-diagram` | draw.io 可编辑示意图:技术路线图、研究框架图、架构/流程图,支持高保真复刻参考图 | 4 · 7 |
+| 绘图 | `scibox-figure`(注册名 `mathmodel-figure-templates`) | 现成 Python 绘图模板:SHAP 蜂群、配对云雨、ROC、泰勒图、相关矩阵等 | 6 |
+| 绘图 | `nature-figure` | 期刊格式数据图(Python/R),多面板组合、投稿级导出 | 5 · 6 · 7 |
+| 文献 | `nature-academic-search` / `-downloader` / `-reader` / `-paper-card` / `-literature-pipeline` | 多源检索、合法全文获取、通读笔记、16 节精读卡、每日监控 | 1 · 2 · 3 |
+| 写作 | `researchwrite`(nature-proposal-writer)/ `nature-writing` / `-citation` / `-ref-verifier` / `-polishing` / `-data` | 开题与 QA 拷问、章节起草、支撑引用、文献核验、润色、数据声明 | 1 · 3 · 4 · 7 |
+| 实验 | `nature-experiment-log` / `-statistics` | 实验日志、统计报告审查 | 5 · 6 · 7 |
+| 投稿 | `nature-reviewer` / `-response` | 模拟同行评审、逐条回复信 | 8 |
+| 转化 | `nature-paper2ppt` / `-image2ppt` / `-paper-to-patent` | 论文转 PPT、图片转 PPT、专利交底 | 9 |
+| 其他 | `anti-defensive-writing`(+`-en`)、`code-review-skill`、`nature-shared`(内部依赖) | 反防御性写作、代码审查、共享依赖 | 4 · 7 · 8 · 9 |
 
-> 注:`nature-figure` 的 `figures4papers` 案例库(第三方已发表论文图,28M)出于版权与体积
-> 考虑未随仓库分发,完整映射见 [`references/skill-inventory.md`](references/skill-inventory.md)。
+两个有意的例外:
 
-其余子 skill(nature-\* 文献与写作系列、researchwrite、anti-defensive-writing 等)位于配套工作区,
-装载协议:
+- `nature-figure` 的 `figures4papers` 案例库(第三方已发表论文图,28M)出于版权与体积考虑
+  未随仓库分发(见 `.gitignore` 内说明);
+- `spreadsheets:xlsx` 为外部插件 skill,未随仓库分发;缺失时用 CSV/Markdown 表或
+  Python 产出数值表(见 [`references/skill-inventory.md`](references/skill-inventory.md))。
 
-1. 优先用 Skill 工具按注册名加载(已安装为 ZCode/Claude Code skill 时直接命中);
-2. 未命中则按清单路径读其 SKILL.md 严格遵循,重活派子 agent 隔离执行;
-3. 子 skill 缺依赖(如 MCP 检索源)时如实降级并告知用户,不假装跑过。
+装载协议:已把 `skills/` 内各 skill 注册为 agent skill 的,直接按注册名调用;
+未注册则按 inventory 清单路径读其 SKILL.md 严格遵循。子 skill 缺依赖(如 MCP 检索源)时
+如实降级并告知,不假装跑过。
 
 ## 设计文档
 

@@ -7,9 +7,10 @@ description: >-
   要求推进下一步时使用。用户说"一键产出论文 / 自动产出论文 / 自动模式 / 给我一个主题直接出
   LaTeX 论文"时,进入自动模式(见下方"自动模式"节):预授权阶段 1-7 连续推进,产出编译
   通过的 LaTeX 工程,停在阶段 7 门等人工验收。读取项目目录中的 pipeline-state.md 判断当前阶段,按
-  references/stage-playbook.md 调度子 skill——全部子 skill 已整合在本工作区,
-  装载方式见 references/skill-inventory.md(nature-* 系列、researchwrite、
-  scibox-diagram、mathmodel-figure-templates、anti-defensive-writing 等)。
+  references/stage-playbook.md 调度子 skill——全部子 skill 随本仓库分发
+  (skills/ 目录),装载方式见 references/skill-inventory.md(nature-* 系列、
+  researchwrite、scibox-diagram、mathmodel-figure-templates、
+  anti-defensive-writing 等)。
   强制阶段门(人工确认)与工件落盘,状态跨会话可恢复。
   本 skill 是路由器:管顺序、工件和门,不替代子 skill 执行具体任务。
 ---
@@ -54,9 +55,10 @@ description: >-
 | 8 | 投稿 | nature-reviewer · nature-writing · nature-response · anti-defensive-writing(回复信立场) | 投稿包 + 逐条回复信 | 投稿/返修决定;可专利点排查 |
 | 9 | 汇报转化 | nature-paper2ppt · nature-image2ppt · nature-paper-to-patent | dissemination.md 台账 + PPT/专利包 | 哪些转化做;专利时序 |
 
-已安装为 ZCode skill 的(code-review-skill、spreadsheets:xlsx)直接用 Skill 工具调;
-其余全部在本工作区内,按 `references/skill-inventory.md` 的路径装载。
-"本体实现"指直接用 ZCode 自身编码能力(先写核心接口与测试),不依赖外部 implement/tdd skill。
+code-review-skill 已随仓库分发(skills/code-review-skill/);spreadsheets:xlsx 为外部
+插件 skill,未随仓库分发,缺失时按 `references/skill-inventory.md` 的替代方案处理。
+其余全部在仓库 `skills/` 内,按 `references/skill-inventory.md` 的路径装载。
+"本体实现"指直接用 agent 自身编码能力(先写核心接口与测试),不依赖外部 implement/tdd skill。
 
 ## 铁律
 
@@ -96,11 +98,10 @@ description: >-
   (出现直接竞争或可能改变选题判断的工作时,写入该文件"重大提醒"节)。
   项目投稿后把 state 里 `monitor.enabled` 置 false 即停。
 - **批量精读**(阶段 2):`scripts/literature-batch.dw.ts` —— 复制到
-  `.zcode/workflow-drafts/` 改 PROJECT_DIR 后用 CreateWorkflow 以 path 运行;
-  首次用 MAX_PDF=2 试跑。精读卡并行产出,证据表由专职 agent 统一登记。
-  脚本里 CARD_SKILL 已指向本工作区的 nature-paper-card;工作区整体移动后需同步改。
+  agent 的工作流草稿目录,改 PROJECT_DIR 与 CARD_SKILL 后用 CreateWorkflow
+  以 path 运行;首次用 MAX_PDF=2 试跑。精读卡并行产出,证据表由专职 agent 统一登记。
 - **多审稿人模拟**(阶段 8):`scripts/multi-reviewer.dw.ts` —— 三位不同视角的
   审稿人在隔离上下文中并行评审,汇总视图只给作者,不回流给审稿人。
-  REVIEWER_SKILL 同样已指向本工作区的 nature-reviewer。
-- 其他并行需求(批量拷问 idea、并行修订等)用 dynamic-workflows 现场编排,
+  运行前按文件头注释改好 REVIEWER_SKILL 路径。
+- 其他并行需求(批量拷问 idea、并行修订等)用动态工作流现场编排,
   结果一律落盘到项目目录。

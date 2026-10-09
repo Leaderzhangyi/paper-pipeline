@@ -1,19 +1,20 @@
 // 论文流水线 · 阶段 8 辅助 —— 多审稿人模拟工作流
 // ─────────────────────────────────────────────────────────────
 // 用法:
-//   1. 复制到 .zcode/workflow-drafts/multi-reviewer.ts(drafts 内编辑免确认)。
+//   1. 复制到 agent 的工作流草稿目录(workflow-drafts,免确认编辑)。
 //   2. 修改 PROJECT_DIR 与 MANUSCRIPT(稿件实际路径),ROUND 填当前轮次。
-//   3. CreateWorkflow(path=该文件路径) 运行。
+//   3. 把 REVIEWER_SKILL 改成本机 paper-pipeline 仓库中该文件的绝对路径。
+//   4. CreateWorkflow(path=该文件路径) 运行。
 // 产出:三位相互隔离的审稿人各出一份报告(07-submission/reviews/),
 // 加一份只给作者看的汇总视图。审稿人之间互不可见。
 
 // ── 配置 ──
-// PROJECT_DIR 与 MANUSCRIPT 改成实际值;REVIEWER_SKILL 已指向本工作区 nature-skills
-// 里的审稿 skill——工作区整体移动后,把 REVIEWER_SKILL 一起改掉。
+// PROJECT_DIR 与 MANUSCRIPT 改成实际值;REVIEWER_SKILL 指向本仓库 skills/ 里的
+// 审稿 skill——填你本机仓库克隆位置的绝对路径。
 const PROJECT_DIR = "C:/Users/ZinkCas/paper-projects/<topic-slug>";
 const MANUSCRIPT = `${PROJECT_DIR}/06-manuscript/draft/main.md`; // ← 按实际稿件路径修改
 const REVIEWS_DIR = `${PROJECT_DIR}/07-submission/reviews`;
-const REVIEWER_SKILL = "C:/Users/ZinkCas/Desktop/论文工作流/nature-skills/skills/nature-reviewer/SKILL.md";
+const REVIEWER_SKILL = "<paper-pipeline 仓库路径>/skills/nature-reviewer/SKILL.md";
 const ROUND = 1;
 
 interface ReviewSummary {

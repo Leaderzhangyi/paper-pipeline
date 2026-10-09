@@ -6,7 +6,7 @@
 
 调度任何子 skill 前先读这一节,不要因为"看起来没安装"就跳过或假装跑过:
 
-1. 先试 Skill 工具按注册名加载(已安装为 ZCode skill 时直接命中)。
+1. 先试 Skill 工具按注册名加载(已注册为 agent skill 时直接命中)。
 2. 未命中 → 查 `references/skill-inventory.md` 拿到 SKILL.md 路径(相对本 skill 目录解析)。
    注意两个目录名陷阱:`researchwrite` 在 `nature-proposal-writer/` 目录下,
    `mathmodel-figure-templates` 在 `scibox-figure/` 目录下。
@@ -61,8 +61,8 @@
 - 每日监控任务会把新论文追加到 `01-literature/monitor.md`,定期人工过一遍,
   值得精读的取回 PDF 放进 `papers/`
 - 待精读 ≥5 篇时,用本 skill 的 `scripts/literature-batch.dw.ts` 并行产出精读卡
-  (复制到 `.zcode/workflow-drafts/` 改 PROJECT_DIR,CreateWorkflow 以 path 运行;
-  首次先把 MAX_PDF 设为 2 试跑,确认卡片质量再放开)
+  (复制到 agent 的工作流草稿目录,改 PROJECT_DIR 与 CARD_SKILL 后用 CreateWorkflow
+  以 path 运行;首次先把 MAX_PDF 设为 2 试跑,确认卡片质量再放开)
 
 **产出**:
 - `01-literature/search-log.md`:检索式与命中记录(可复现)
@@ -194,7 +194,7 @@ ref-verifier 零未解冲突;字数/图表数符合目标期刊;
 **调度**:
 - 投稿前:`nature-reviewer` 模拟 2-3 个相互隔离的审稿人,出 Major/Minor Concerns;
   按意见修补后重审一轮。需要 3 位不同视角审稿人并行时,用本 skill 的
-  `scripts/multi-reviewer.dw.ts`(复制到 `.zcode/workflow-drafts/` 改配置后运行,
+  `scripts/multi-reviewer.dw.ts`(复制到 agent 的工作流草稿目录,改配置后运行,
   审稿人相互隔离,汇总视图只给作者)
 - `nature-writing`:投稿包(cover letter、title page、highlights、作者贡献、
   数据可用性、推荐审稿人)

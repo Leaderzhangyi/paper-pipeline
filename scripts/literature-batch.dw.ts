@@ -1,21 +1,22 @@
 // 论文流水线 · 阶段 2 辅助 —— 批量精读工作流
 // ─────────────────────────────────────────────────────────────
 // 用法:
-//   1. 把本文件复制到 .zcode/workflow-drafts/literature-batch.ts
-//      (drafts 目录内编辑免确认),或复制到项目目录。
+//   1. 把本文件复制到 agent 的工作流草稿目录(workflow-drafts,免确认编辑),
+//      或复制到项目目录。
 //   2. 修改下方 PROJECT_DIR 为你的论文项目目录。
-//   3. 首次使用先把 MAX_PDF 改为 2 试跑,确认卡片质量后再放开。
-//   4. 用 CreateWorkflow(path=该文件路径) 运行;提交时会先做类型检查,
+//   3. 把 CARD_SKILL 改成本机 paper-pipeline 仓库中该文件的绝对路径。
+//   4. 首次使用先把 MAX_PDF 改为 2 试跑,确认卡片质量后再放开。
+//   5. 用 CreateWorkflow(path=该文件路径) 运行;提交时会先做类型检查,
 //      报诊断就改文件重提。
 // 产出:每篇论文一张精读卡(01-literature/cards/)+ 证据表自动登记。
 
 // ── 配置(每次运行前确认)──
-// PROJECT_DIR 改成你的论文项目目录;CARD_SKILL 已指向本工作区 nature-skills 里的
-// 精读卡 skill——工作区整体移动后,把 CARD_SKILL 一起改掉。
+// PROJECT_DIR 改成你的论文项目目录;CARD_SKILL 指向本仓库 skills/ 里的精读卡
+// skill——填你本机仓库克隆位置的绝对路径。
 const PROJECT_DIR = "C:/Users/ZinkCas/paper-projects/<topic-slug>";
 const PAPERS_DIR = `${PROJECT_DIR}/01-literature/papers`;
 const CARDS_DIR = `${PROJECT_DIR}/01-literature/cards`;
-const CARD_SKILL = "C:/Users/ZinkCas/Desktop/论文工作流/nature-skills/skills/nature-paper-card/SKILL.md";
+const CARD_SKILL = "<paper-pipeline 仓库路径>/skills/nature-paper-card/SKILL.md";
 const MAX_PDF = 20;
 
 interface PaperRef {
