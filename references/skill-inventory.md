@@ -1,6 +1,8 @@
 # 子 skill 清单与装载协议
 
 paper-pipeline 调度的全部子 skill 都在本工作区内,或已安装为 ZCode skill。
+其中**三个绘图 skill 已随本仓库分发**(`skills/` 目录),克隆即用;
+其余位于配套工作区(路径以 `../` 开头),需要单独获取。
 本清单是唯一映射源:注册名 → SKILL.md 路径(相对本 skill 目录)→ 用途 → 所属阶段。
 
 ## 装载协议
@@ -25,11 +27,11 @@ paper-pipeline 调度的全部子 skill 都在本工作区内,或已安装为 ZC
 | nature-reader | ../nature-skills/skills/nature-reader/SKILL.md | 中英对照全文通读笔记 | 2 |
 | nature-paper-card | ../nature-skills/skills/nature-paper-card/SKILL.md | 16 节深度精读卡 | 2·3 |
 | nature-literature-pipeline | ../nature-skills/skills/nature-literature-pipeline/SKILL.md | 每日文献发现流水线(监控自动化任务用) | 2 |
-| scibox-diagram | ../sci-box/skills/scibox-diagram/SKILL.md | draw.io 可编辑示意图:技术路线图、研究框架、架构/流程图 | 4·7 |
+| scibox-diagram | skills/scibox-diagram/SKILL.md(随仓库分发) | draw.io 可编辑示意图:技术路线图、研究框架、架构/流程图 | 4·7 |
 | nature-experiment-log | ../nature-skills/skills/nature-experiment-log/SKILL.md | 标准化实验日志(可选飞书/Obsidian 集成) | 5 |
 | nature-statistics | ../nature-skills/skills/nature-statistics/SKILL.md | 统计报告审查:重复数、不确定性、检验、图注统计 | 5·6·7 |
-| nature-figure | ../nature-skills/skills/nature-figure/SKILL.md | 期刊格式数据图(Python/R) | 5·6·7 |
-| mathmodel-figure-templates | ../sci-box/skills/scibox-figure/SKILL.md | 现成科研绘图模板(SHAP 蜂群、云雨、ROC、泰勒图等) | 6 |
+| nature-figure | skills/nature-figure/SKILL.md(随仓库分发;figures4papers 案例库未含,见 .gitignore) | 期刊格式数据图(Python/R) | 5·6·7 |
+| mathmodel-figure-templates | skills/scibox-figure/SKILL.md(随仓库分发) | 现成科研绘图模板(SHAP 蜂群、云雨、ROC、泰勒图等) | 6 |
 | nature-writing | ../nature-skills/skills/nature-writing/SKILL.md | 章节起草、论证重构、首次投稿材料 | 7·8 |
 | nature-citation | ../nature-skills/skills/nature-citation/SKILL.md | 正文配 Nature/CNS 系支撑引用 | 7 |
 | nature-ref-verifier | ../nature-skills/skills/nature-ref-verifier/SKILL.md | 参考文献逐条多源交叉验证 | 7 |

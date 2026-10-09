@@ -111,6 +111,10 @@ paper-pipeline/
 │   ├── 06-manuscript/          # 大纲 + LaTeX 工程骨架(latexmk 配置齐全)
 │   ├── 07-submission/          # 投稿包
 │   └── 08-dissemination/       # 汇报转化台账
+├── skills/                     # 随仓库分发的绘图子 skill(克隆即用)
+│   ├── scibox-diagram/         # draw.io 可编辑示意图(路线图/框架图/架构图)
+│   ├── scibox-figure/          # 科研绘图模板(SHAP 蜂群、云雨、ROC、泰勒图等)
+│   └── nature-figure/          # 期刊格式数据图(Python/R)
 ├── docs/
 │   └── pipeline-design.html / .json   # 流水线可视化设计图
 └── assets/
@@ -127,9 +131,19 @@ paper-pipeline/
 
 ## 子 skill 依赖
 
-本仓库只含**路由器本体**。九阶段调度的子 skill(nature-\* 系列、researchwrite、scibox-diagram、
-anti-defensive-writing 等)位于配套工作区,完整映射表与装载协议见
-[`references/skill-inventory.md`](references/skill-inventory.md):
+**三个绘图 skill 已随仓库分发**(`skills/` 目录),覆盖论文全流程的出图需求,克隆即用:
+
+| skill | 能力 | 阶段 |
+|-------|------|------|
+| `scibox-diagram` | draw.io 可编辑示意图:技术路线图、研究框架图、架构/流程图,支持高保真复刻参考图 | 4 · 7 |
+| `scibox-figure`(注册名 `mathmodel-figure-templates`) | 现成 Python 绘图模板:SHAP 蜂群、配对云雨、ROC、泰勒图、相关矩阵等 | 6 |
+| `nature-figure` | 期刊格式数据图(Python/R),多面板组合、投稿级导出 | 5 · 6 · 7 |
+
+> 注:`nature-figure` 的 `figures4papers` 案例库(第三方已发表论文图,28M)出于版权与体积
+> 考虑未随仓库分发,完整映射见 [`references/skill-inventory.md`](references/skill-inventory.md)。
+
+其余子 skill(nature-\* 文献与写作系列、researchwrite、anti-defensive-writing 等)位于配套工作区,
+装载协议:
 
 1. 优先用 Skill 工具按注册名加载(已安装为 ZCode/Claude Code skill 时直接命中);
 2. 未命中则按清单路径读其 SKILL.md 严格遵循,重活派子 agent 隔离执行;

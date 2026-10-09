@@ -1,3 +1,8 @@
+# ---- nature-figure 第三方论文案例图(28M,版权与体积考虑不随仓库分发) ----
+# 本地工作区 nature-skills/skills/nature-figure/assets/figures4papers/ 有完整案例库,
+# 需要时复制到同路径即可被 skill 识别。
+skills/nature-figure/assets/figures4papers/
+
 # ---- 会话 / 工具本地状态(运行残留,与 skill 本体无关) ----
 .mimosa/
 .zcode/
