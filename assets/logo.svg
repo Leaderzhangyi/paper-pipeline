@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="paper-pipeline logo">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4338CA"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="pipe" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#A5F3FC"/>
+      <stop offset="100%" stop-color="#E0F2FE"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 渐变底 -->
+  <rect width="240" height="240" rx="52" fill="url(#bg)"/>
+
+  <!-- 论文(带折角) -->
+  <path d="M78 32 h64 l30 30 v86 a10 10 0 0 1 -10 10 H78 a10 10 0 0 1 -10 -10 V42 a10 10 0 0 1 10 -10 z"
+        fill="#FFFFFF"/>
+  <path d="M142 32 l30 30 h-24 a6 6 0 0 1 -6 -6 z" fill="#C7D2FE"/>
+
+  <!-- 正文文本行 -->
+  <rect x="84" y="78"  width="58" height="9" rx="4.5" fill="#4F46E5"/>
+  <rect x="84" y="97"  width="72" height="8" rx="4"   fill="#A5B4FC"/>
+  <rect x="84" y="113" width="62" height="8" rx="4"   fill="#A5B4FC"/>
+  <rect x="84" y="129" width="44" height="8" rx="4"   fill="#C7D2FE"/>
+
+  <!-- 流水线:节点连线 + 箭头 -->
+  <path d="M64 186 H176" stroke="url(#pipe)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M184 176 L204 186 L184 196 Z" fill="#E0F2FE"/>
+
+  <!-- 三个阶段节点 -->
+  <g>
+    <circle cx="64"  cy="186" r="11"  fill="#FFFFFF"/>
+    <circle cx="64"  cy="186" r="4.5" fill="#0891B2"/>
+    <circle cx="120" cy="186" r="11"  fill="#FFFFFF"/>
+    <circle cx="120" cy="186" r="4.5" fill="#4F46E5"/>
+    <circle cx="176" cy="186" r="11"  fill="#FFFFFF"/>
+    <circle cx="176" cy="186" r="4.5" fill="#0891B2"/>
+  </g>
+</svg>

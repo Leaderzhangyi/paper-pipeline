@@ -1,0 +1,76 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "paper-pipeline · 九阶段论文流水线",
+    "locale": "zh-CN",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    { "id": "core", "label": "阶段 1-6 · 定题与验证" },
+    { "id": "finish", "label": "阶段 7-9 · 成文转化 + 状态源" }
+  ],
+  "mainPath": ["topic", "literature", "ideas", "method", "experiments", "ablation"],
+  "nodes": [
+    { "id": "topic", "lane": "core", "col": 0, "type": "backend", "label": "① 选题", "sublabel": "topic.md · 研究问题与边界", "width": 130 },
+    { "id": "literature", "lane": "core", "col": 1, "type": "backend", "label": "② 文献", "sublabel": "精读卡 · 证据表初版", "width": 130 },
+    { "id": "ideas", "lane": "core", "col": 2, "type": "backend", "label": "③ idea", "sublabel": "候选池 · argument_map", "width": 130 },
+    { "id": "method", "lane": "core", "col": 3, "type": "backend", "label": "④ 方法", "sublabel": "design.md · 框架图", "width": 130 },
+    { "id": "experiments", "lane": "core", "col": 4, "type": "backend", "label": "⑤ 实验", "sublabel": "实验日志 · 主结果", "width": 130 },
+    { "id": "ablation", "lane": "core", "col": 5, "type": "backend", "label": "⑥ 消融", "sublabel": "消融矩阵 · 对比表", "width": 130 },
+    { "id": "state", "lane": "finish", "col": 0, "type": "database", "label": "pipeline-state.md", "sublabel": "唯一状态源 · 断点续跑", "width": 150 },
+    { "id": "writing", "lane": "finish", "col": 1, "type": "backend", "label": "⑦ 撰写", "sublabel": "证据先于文字 · 初稿", "width": 130 },
+    { "id": "submission", "lane": "finish", "col": 2, "type": "backend", "label": "⑧ 投稿", "sublabel": "投稿包 · 逐条回复信", "width": 130 },
+    { "id": "dissemination", "lane": "finish", "col": 3, "type": "backend", "label": "⑨ 汇报转化", "sublabel": "组会 PPT · 专利交底", "width": 130 }
+  ],
+  "edges": [
+    { "id": "e-entry", "from": "state", "to": "topic", "label": "会话入口 · 读状态", "role": "branch", "variant": "dashed" },
+    { "id": "e-g1", "from": "topic", "to": "literature", "label": "门1" },
+    { "id": "e-g2", "from": "literature", "to": "ideas", "label": "门2" },
+    { "id": "e-g3", "from": "ideas", "to": "method", "label": "门3" },
+    { "id": "e-g4", "from": "method", "to": "experiments", "label": "门4" },
+    { "id": "e-g5", "from": "experiments", "to": "ablation", "label": "门5" },
+    { "id": "e-g6", "from": "ablation", "to": "writing", "label": "门6", "role": "return" },
+    { "id": "e-g7", "from": "writing", "to": "submission", "label": "门7", "role": "main" },
+    { "id": "e-g8", "from": "submission", "to": "dissemination", "label": "门8", "role": "main" },
+    { "id": "e-rollback", "from": "submission", "to": "method", "label": "门未过 · 回退", "role": "return", "variant": "security" }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "状态在磁盘,不在对话",
+      "items": [
+        "pipeline-state.md 是唯一状态源:current_stage、九道门、progress.todo",
+        "会话中断后照 state 续跑,不重做已落盘的产出",
+        "每个论文项目一个目录,脚手架复制自 templates/project/"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "门 = 停下来等人",
+      "items": [
+        "达到退出标准后置 waiting,把门问题抛给用户",
+        "用户明确确认才置 passed 并推进,绝不自动放行、不替答",
+        "门未过或审稿意见推翻结论 → 回退,log 记原因与受影响工件"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "证据先于文字",
+      "items": [
+        "阶段 7 起草前:evidence_table 与 argument_map 必须终版且被正文引用",
+        "每个 claim 对应证据表一行,数字可追溯到实验 log",
+        "缺结果如实标「待补实验」,不编造、不外推"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "路由器不干活,子 skill 干活",
+      "items": [
+        "本 skill 只管顺序、工件与门;具体任务全部调度子 skill",
+        "25 个子 skill 全在工作区,按 skill-inventory.md 装载",
+        "并行需求(批量精读、多审稿人)走 dynamic-workflows 脚本"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+# ---- 会话 / 工具本地状态(运行残留,与 skill 本体无关) ----
+.mimosa/
+.zcode/
+.claude/settings.local.json
+
+# ---- 生成物:视觉检查 ----
+docs/*.visual-check.*
+
+# ---- LaTeX 编译产物 ----
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.synctex(busy)
+*.toc
+*.lof
+*.lot
+*.out
+*.bcf
+*.run.xml
+*.xdv
+*.nav
+*.snm
+*.vrb
+*.idx
+*.ilg
+*.ind
+*.log
+main-page1.png
+
+# ---- 编辑器 / IDE ----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ---- 操作系统 ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- 运行时 ----
+node_modules/
+__pycache__/
+*.py[cod]
+.venv/

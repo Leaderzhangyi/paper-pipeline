@@ -1,0 +1,59 @@
+% ============================================================
+% 分节契约
+% purpose:      用证据支撑 argument_map 的每个 claim
+% allowed claims: 仅 evidence_table 已登记结果;auto 模式一律 \todobox 占位
+% forbidden claims: 任何未经实验的数字以确定语气出现(铁律)
+% inputs:       04-experiments/ · 05-ablation/ · experiment_log.md
+% 验证方式:     nature-statistics 审查 + 数字可回溯 experiment_log
+% ============================================================
+\section{Experiments}\label{sec:exp}
+
+\subsection{Setup}
+\textbf{Datasets.}
+<数据集、划分协议、评估指标;与 SOTA 对比须同协议,引 \cite{...}。>
+
+\textbf{Baselines.}
+<对比方法及来源; reproduced 数字标注出处。>
+
+\textbf{Implementation details.}
+<超参、种子控制、硬件;细节足以复现。>
+
+\subsection{Main Results}
+% 表格骨架就位;auto 模式数字全部占位,实验完成后回填并去掉 \todobox
+\begin{table}[t]
+  \centering
+  \caption{<主结果:一句话说清该表支撑哪个 claim。均值$\pm$标准差,
+  括号内种子数;统计规范过 nature-statistics。>}
+  \label{tab:main}
+  \begin{tabular}{lcc}
+    \toprule
+    Method & <Metric 1> & <Metric 2> \\
+    \midrule
+    <Baseline 1> \cite{...} & \todobox{待补实验} & \todobox{待补实验} \\
+    <Baseline 2> \cite{...} & \todobox{待补实验} & \todobox{待补实验} \\
+    \textbf{Ours}           & \todobox{待补实验} & \todobox{待补实验} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+<结果解读:指向表~\ref{tab:main},只做有证据的解读。>
+
+\subsection{Ablation Study}\label{sec:ablation}
+% 消融矩阵来自 05-ablation/ablation_plan.md;每个组件一行
+\begin{table}[t]
+  \centering
+  \caption{<消融:去掉每个组件掉多少,为什么。>}
+  \label{tab:ablation}
+  \begin{tabular}{lc}
+    \toprule
+    Variant & <Metric 1> \\
+    \midrule
+    Full model              & \todobox{待补实验} \\
+    w/o <组件 A>            & \todobox{待补实验} \\
+    w/o <组件 B>            & \todobox{待补实验} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+<每行一句"去掉它掉多少,为什么"。审稿人可能问的
+"为什么不消融 X"的预答也放这里。>

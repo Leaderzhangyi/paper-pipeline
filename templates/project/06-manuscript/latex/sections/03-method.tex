@@ -1,0 +1,39 @@
+% ============================================================
+% 分节契约
+% purpose:      方法形式化描述,审稿人能据此复现
+% allowed claims: 每个设计选择配一句"为什么不用 X"(design.md 差异表)
+% forbidden claims: 无消融支撑的优越性断言(留给 Results)
+% inputs:       03-method/design.md · 03-method/figures/
+% 验证方式:     与 design.md 逐条对照;框架图来自 scibox-diagram
+% ============================================================
+\section{Method}\label{sec:method}
+
+\subsection{Problem Formulation}
+<形式化:记号、输入输出、优化目标。>
+
+\begin{equation}
+  <目标函数/核心公式,与 design.md 编号一致>
+  \label{eq:objective}
+\end{equation}
+
+\subsection{<核心模块 A>}
+<机制描述;设计选择的理由,含"为什么不用 X"。>
+
+\subsection{<核心模块 B>}
+<同上。>
+
+\subsection{Overall Framework}
+% 框架图由 scibox-diagram 产出(draw.io 可编辑源文件在 03-method/figures/),
+% 导出 PDF 放 figures/,此处引用:
+% \begin{figure}[t]
+%   \centering
+%   \includegraphics[width=\linewidth]{framework.pdf}
+%   \caption{<方法总览。读图即可理解主流程,不依赖正文。>}
+%   \label{fig:framework}
+% \end{figure}
+<端到端流程走读。>
+
+% 伪代码(可选):
+% \begin{algorithm}
+%   <design.md 中的伪代码,algorithm/algorithmic 宏包按需加>
+% \end{algorithm}

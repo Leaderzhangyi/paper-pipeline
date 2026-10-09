@@ -1,0 +1,47 @@
+% !TeX program = xelatex
+% ============================================================
+% 论文主文件 —— paper-pipeline 阶段 7 产出
+% 默认 ctexart + xelatex:中英混排都没问题(占位标记"待补实验"含中文,
+% pdflatex 编不了),纯英文内容渲染与 article 无异。
+% 投稿换 venue 模板时,英文 venue 可换回 \documentclass{article} + pdflatex,
+% 但需把 \todobox 的中文提示语一并改英文。
+% ============================================================
+\documentclass[11pt,a4paper]{ctexart}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{multirow}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{xcolor}
+
+% ---- 占位标注块:auto 模式下未经实验验证的数字一律用它显式标出 ----
+\newcommand{\todobox}[1]{%
+  \textcolor{orange}{$\bigstar$}\textcolor{orange}{\textsf{[#1]}}}
+
+\graphicspath{{figures/}{../figures/}}
+
+\title{<论文标题:阶段 1 的 topic 一句话版提炼,按 anti-defensive-writing
+  发布会原则突出最值得发表的点>}
+
+\author{<作者与单位;投稿版按目标期刊要求拆到 title page>}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\input{sections/00-abstract}
+\input{sections/01-introduction}
+\input{sections/02-related-work}
+\input{sections/03-method}
+\input{sections/04-experiments}
+\input{sections/05-discussion}
+\input{sections/06-conclusion}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
